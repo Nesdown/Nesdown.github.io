@@ -1,0 +1,73 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:700);
+@import url(https://fonts.googleapis.com/css?family=Lato:400,300italic,400italic,700&subset=latin,latin-ext);
+html, body {
+	padding: 0;
+	margin: 0;
+}
+
+html {
+	background-color: #f1f1f1
+}
+
+body {
+	font-family: "Lato", Helvetica, sans-serif;
+}
+
+/*header menu*/
+#menu {
+	font-family: "Roboto Condensed", Helvetica, sans-serif;
+	background: #ccd0d3;
+	height: 75px;
+	line-height: 75px;
+	box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+}
+
+#menu > ul {
+	padding: 0;
+	margin: 0;
+	text-align: center;
+}
+
+#menu > ul > li {
+	display: inline-block;
+	list-style: none;
+	margin-right: 37px;
+}
+
+#menu > ul > li:last-child {
+	margin-right: 0;
+}
+
+#menu > ul > li a{
+	font-size: 24px;
+	color: #464847;
+	text-decoration: none;
+}
+
+#menu > ul > li a:hover{
+	text-decoration: underline;
+}
+
+/*content*/
+#content {
+	margin-top: 2%;
+	margin-left: 25%;
+	margin-right: 25%;
+}
+
+#text {
+	font-size: 20px;
+	line-height: 1.5;
+	text-align: justify;
+}
+
+/*different content effects*/
+#shadow {
+	box-shadow: 0px 3px 5px rgba(100, 100, 100, 0.49);
+}
+
+#center {
+	padding-top: 30px;
+	padding-bottom: 30px;
+	padding-left: 35%;
+}
