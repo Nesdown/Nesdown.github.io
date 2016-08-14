@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset = "UTF-8"/>
+	<title>Yet another developer</title>
+	<link rel="shortcut icon" href="favicon.ico" type="x-icon">
+
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link href="../prism/prism.css" rel="stylesheet" />
+</head>
+
+<body>
+	<script src="../prism/prism.js"></script>
+	<div id="page-wrapper">
+		<header id="header"> 
+			<div id="menu"> 
+				<ul>
+					<li><a href="index.html"><b>ABOUT ME</b></a></li>
+					<li><a href="article.html"><b>ARTICLES</b></a></li>
+					<!--<li><a href="portfolio.html"><b>PORTFOLIO</b></a></li>-->
+					<li><a href="https://github.com/nesdown"><b>GITHUB</b></a></li>
+					<li><a href="https://twitter.com/Newsdownloads12"><b>TWITTER</b></a></li>
+					<li><a href="#"><b>RSS</b></a></li>
+				</ul>
+			</div>
+		</header>
+
+		<div id="content">
+			<div id="headline-articles"> 
+				Getting started with Love2d
+			</div>
+
+			<div id="text">
+				<br>
+				Actually, the first version of this 'article' was made in November, 2015. But one month later the hero of post got huge update which brought lots of new stuff, so I understood that it would be much better to rewrite the material I had. Anyway, this new features make me sure that you'll love 'Love' too, and current post will help you, I hope. Still interested? Let's get started!
+				<br><br>
+				<i>By the way, I'm sorry for the pun which will appear during this blogspot, but the name 'Love2D' and some talisman-symbols of this devtool are so funny that I can't restrain - just look at this pinky pig:</i> <br><br>
+
+				<center><img class="shadow" src="../images/articles/love/pig.png" width=400px/></center> <br><br>
+
+				<strong>What is Love?</strong> <br>
+
+				Love2D is a framework based on Lua, which main goal is to make the process of creating games easier and funnier. It's important to remember that Lua is scripting language, so all game logic can be easily distributed by different script files or groups, which allows you to control code growth without serious efforts.
+				Another one point about Lua is that it doesn't have straight definition of paradigm: there is something like combination of  functional and objected-oriented programming, caused by special data type - 'tables' which can replace objects, arrays and even generics. Some people hate this, telling that such tricks just destroy logical connections in project, some people love tables because of their simplicity.<br><br>
+
+				And last but not least is fact that Love was specially made for work with graphics, containing hundreds of functions to change parameters like image scale, rotation, moving, transforming without serious artifacts appearing (this problem is well known in Game Maker: Studio, for example: changing calling the function of image rotation from code with speed-parameter causes horrible graphics deterioration, like sharp pixel edges emerging). Sooth to say, there is no text console in Love, only app window - there's no difference between text or graphics if you wanna display 'em.<br><br>
+
+				As you can see, framework is mostly focused on GUI - perfect for gamedev, yeah? But there's another nice news: 'pink pig' is distributed by zlib license, so you can use it in any commercial project you want, for free. Love is abolutely opensource, so you can join to the number of contributors anytime, or just write some external libraries. Do what you want!<br><br>
+
+				UPD: I've forgotten to tell, that this framework is just an environment for running your code and providing syntax - there's no built-in text editor. But don't worry: all you need in this case are SublimeText or NotePad++ with syntax highlighter chosen in settings. Or, take a look at ZeroBrain Studios, which has all-in one: editor, debugger, runner and friendly interface.<br><br><br>
+
+				<strong>Simplicity is our creed</strong><br>
+				I've mentioned before that Lua is very simple. And now just imagine how great this simplicity can be adding features of Love framework comparing to other game engines (note: we're talking about devtools that need programming language - forget about visual constructors, they're useless). 
+				Let me show you some examples.
+				As the real programmers, we'll begin with 'Hello world': 
+				
+				<pre><code class="language-lua"> function love.draw()
+ 	love.graphics.print("Hello world!", 50, 50)
+end  </code></pre>
+
+				All you have to do is to save code into 'main.lua' 
+				and launch it via framework app.  
+				You'll see something like that:<br><br>
+
+				<center><img class="shadow" src="../images/articles/love/hello.png" /></center> <br><br>
+
+				Remember I've told you that Love has no text console? Here's a result. But let's get back to the code: as you can see, love.graphics.print() uses 3 parameters: text and its x/y coordinates to display. Nothing difficult.
+				Another question are functions. Usually, you need just three 'main' functions: <br><br>
+
+				<pre><code class="language-lua"> function love.load()
+    x = 0.5
+    log = false
+    text = "Here's text"
+end </code></pre>
+
+				This is place where variables are initialized. Lua doesn't have strict typing, so it's ok if you enter just var's name and it's value. Nothing less, nothing more. <br><br>
+				<pre><code class="language-lua"> function love.update(dt)
+    if x < 1 then
+        x = x + 0.5
+    end
+end </code></pre>
+
+				update() contains all actions needed to repeat while application's running. Parameter 'dt' means DeltaTime and sets update frequency. Usually you put here conditional statements, cycles, etc., but you can just declare own function and then call it from here:
+
+				<pre><code class="language-lua"> function love.cycle(i)
+    for 1, i do
+        x = x + 1
+    end
+end
+
+function love.update(dt)
+    love.cycle(5)
+end
+</code></pre><br><br>
+			
+				Finally, the last 'main' function, made specially for GUI and containing everything for graphics in common - we've seen it today:
+
+				<pre><code class="language-lua"> function love.draw()
+    love.graphics.print('Lua is eaaaasyyyy!')
+end
+</code></pre><br><br>
+
+				That's it. Work with variables, functions, typing, declaring own funcs... One thing left - tables, hooray! Here are some cases of their usage:<br><br>
+
+				<i>Example 1. Storing data.</i><br>
+				In common, tables are all about storing big numbers of variables. The only question is how to use this aspect.
+				<pre><code class="language-lua"> function love.load()
+    out = {}
+    out.x = 15
+    out.y = 20
+    out.text = "Hello world"
+end
+</code></pre>
+				This is some kind of object, with parameters - coordinates and text 'inside'. Table in this case is like a box storing all information you need. But the feature is that such 'boxes' make a groups spreading information by characteristics. Which characteristics? Depends on you.<br><br>
+
+				<i>Example 2. Arrays.</i>
+				<pre><code class="language-lua"> function love.load()
+     numbers = {1, 5, 3, 8, 0, 34, 52}
+     words = {"cat", "dog", "car"}
+end
+</code></pre>
+				
+				The same as array in other programming languages, yeah? Well, not at all. every element in this 'array' has key (number) and value. Soooo... Let's move to the next example. <br><br>
+
+				<i>Example 3. Generics/Collections</i>
+				<pre><code class="language-lua"> function love.load()
+    col = {}
+    col["key1"] = 14
+    col["key2"] = 16
+end
+</code></pre>
+
+			In Java things like this called maps. Anyway, you might be surprised, but next code is all the same as previous:
+
+			<pre><code class="language-lua"> function love.load()
+    col = {}
+    key1 = 14
+    key2 = 16
+end
+</code></pre>
+
+			And we can get any value with 'col.key1', for example. Or look through all elements with cycle:
+
+			<pre><code class="language-lua"> for key, value in ipairs(col)
+    love.graphics.print(key, 10, 10)
+</code></pre><br><br><br>
+
+			<strong>Putting all together</strong><br>
+			Well, we've looked at the basics of Lua and Love2D, but it wasn't really funny, agree? Let's fix it making something more interesting than examples of tables. Something remotely resembling game prototype, for example:<br><br>
+
+			<pre><code class="language-lua"> 
+function love.load()
+	--block that will appear
+	block = {}
+	block.image = love.graphics.newImage("green.png")
+	block.x = love.math.random(10, 500)
+	block.y = love.math.random(10, 500)
+	score = 0
+	isLoose = false
+end 
+
+function love.mousereleased(x, y, i)
+	--if the block was clicked, replace it
+	if x >= block.x and x < block.x + 50 and y >= block.y and y <= block.y + 50 then
+		block.x = love.math.random(10, 500)
+		block.y = love.math.random(10, 500)
+		score = score + 1
+	--GameOver condition
+	else isLoose = true  
+	end 
+end 
+
+function love.draw()
+	--set background color to purple
+	love.graphics.setBackgroundColor(50, 34, 65, 100)
+	--draw in-game objects, including text
+	love.graphics.draw(block.image, block.x, block.y)
+	love.graphics.print(score, 10, 10)
+	--GameOver message
+	if(isLoose == true) then
+		love.graphics.print("Game over!", 10, 25)
+	end  
+end 
+</code></pre><br><br>
+
+			Here we have 'block' table containing its image and coordinates. Love supports almost all popular image formats like png, jpg, bmp, etc, so you can put any picture here - just add it to directory with 'main.lua' file. There's also score variable  for counting 'correct clicks' and a bool var for 'Game Over' message.<br><br>
+
+			Function love.mousereleased() gets mouse coordinates after click, and checks overlap with block's x/y. If this condition is true, score adds 1, else game ends.<br><br>
+
+			Here's the result:<br><br>
+			<center><img class="shadow" src="../images/articles/love/result.png" /></center> <br><br>
+
+			Of course, this is far from real game, but it has taken just 37 lines with comments! That's why Love2D is so perfect - it makes development process very fast and easy.<br><br><br>
+
+			<strong>What will be next with the pig?</strong><br>
+			Love grows very quickly. The last version released on 16th February (usually they've done new releases on 14th, but it looks like Valentine's Day went wrong this year) added support of Android and iOS platformes, possibility to use Google AdSense and the whole package for mobile development. Everyday community enthusiasts make improvement to unofficial consoles' compilers - the framework gets absolutely cross-platformed. Mobile development gives huge money to its heroes via advertisement or  in-app donations - with free license it's possible to take away all  jackpot, having fun with easy and  jet devtool. Don't forget to visit official site and wiki - this guys are really cool.
+			https://love2d.org/<br><br>
+
+			I  hope this article made you sure in advantages of Love2D for game development, and you'll at least play around with it. Before I go, I will leave some screenshots of projects from the world made with 'pinky pig' - just for motivation:
+			<br><br>
+			<center><img class="shadow" src="../images/articles/love/pr1.png" width=500px/></center> <br><br>
+			
+			<center><img class="shadow" src="../images/articles/love/pr2.png" width=500px/></center> <br><br>
+			
+			<center><img class="shadow" src="../images/articles/love/pr3.png" width=500px/></center> <br><br>
+			Have fun!
+			<!--end of article.-->
+			</div>
+		</div>
+	</div>
+
+</body>
+
+</html>

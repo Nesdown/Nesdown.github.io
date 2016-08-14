@@ -58,6 +58,7 @@ html {
 	font-size: 20px;
 	line-height: 1.5;
 	text-align: justify;
+	margin-bottom: 10%;
 }
 
 /*different content effects*/
@@ -113,11 +114,4 @@ html {
 	color: #2b9ae8;
 	text-decoration: none;
 	font-style: italic;
-}
-
-#content-portfolio {
-	margin-top: 2%;
-	margin-left: 25%;
-	margin-right: 25%;
-	background-color: rgba(0, 0, 0, 0.25)
 }
