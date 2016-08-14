@@ -99,6 +99,14 @@ html {
 	padding-left: 5%;
 }
 
+#headline-article-name {
+	font-family: "Roboto", Helvetica, sans-serif;
+	font-weight: 500;
+	font-size: 24px;
+	text-decoration: none;
+	color: #232323;
+}
+
 /*styles for portfolio page*/
 #headline-portfolio {
 	font-family: "Roboto", Helvetica, sans-serif;
