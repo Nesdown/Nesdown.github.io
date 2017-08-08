@@ -1,0 +1,43 @@
+@import url('https://fonts.googleapis.com/css?family=Ubuntu:300i,400');
+
+#labels {
+	font-size: 200%;
+	color: #FFFFFF;
+	margin-top: 3%;
+}
+
+body {
+	font-family: 'Ubuntu', sans-serif;
+	background-color: #545454;
+}
+
+input {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 50%;
+	margin-left: 7%;
+	resize: none;
+}
+
+a.big {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 300%;
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+button {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 130%;
+	height: 60px;
+	width:240px;
+	background-color: #FECC00;
+	border: 1px solid #D4D4D4;
+	-moz-border-radius: 8px;
+    -webkit-border-radius: 8px;
+    border-radius: 8px;
+}
+
+button:hover {
+	background-color: #FFD732;
+	cursor: pointer
+}
