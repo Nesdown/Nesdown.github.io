@@ -25,9 +25,11 @@ a.big {
 	text-decoration: none;
 }
 
-a {
-	text-decoration: none;
+a.small {
+	font-family: 'Ubuntu', sans-serif;
+	font-size: 40%;
 	color: #FFFFFF;
+	text-decoration: none;
 }
 
 button {
