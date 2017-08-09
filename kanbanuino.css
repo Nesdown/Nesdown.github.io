@@ -27,9 +27,10 @@ a.big {
 
 a.small {
 	font-family: 'Ubuntu', sans-serif;
-	font-size: 40%;
+	font-size: 100%;
 	color: #FFFFFF;
 	text-decoration: none;
+	margin-left: 85%
 }
 
 button {
