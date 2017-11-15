@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset = "UTF-8"/>
+	<title>﻿Why APIs are a real evil for beginning developers</title>
+	<link rel="shortcut icon" href="../favicon.ico" type="x-icon">
+
+	<meta name="keywords" content="software, it, java, python, development, programming, rpi, raspberry">
+	<meta name="author" content="Bohdan Glushko">
+
+	<link rel="stylesheet" type="text/css" href="../css/style.css">
+	<link href="../prism/prism.css" rel="stylesheet" />
+</head>
+
+<body>
+	<script src="../prism/prism.js"></script>
+	<div id="page-wrapper">
+		<header id="header">
+			<div id="menu">
+				<ul>
+					<li><a href="../index.html"><b>ABOUT ME</b></a></li>
+					<li><a href="../article.html"><b>ARTICLES</b></a></li>
+					<!--<li><a href="portfolio.html"><b>PORTFOLIO</b></a></li>-->
+					<li><a href="../https://github.com/nesdown"><b>GITHUB</b></a></li>
+					<li><a href="../https://twitter.com/Newsdownloads12"><b>TWITTER</b></a></li>
+					<li><a href="../rss/feed.rss"><b>RSS</b></a></li>
+				</ul>
+			</div>
+		</header>
+
+		<div id="content">
+			<div id="headline-article-text">
+			<div id="headline-article-name">
+				Why APIs are a real evil for beginning developers
+			</div>
+
+			<div id="text">
+				<br>
+				<strong>Instead of an introduction</strong> <br>
+
+				First of all, the reason of creating this article was my experience of work with some developers – in conditions of hobby and commercial projects, and, of course, my own mistakes and tries I have tried during some period of my life as a developer. Anyway, it is not even a big article – just a small note-reminder for some newbies and some sort of a reason to ‘think about’ for experienced devs. I do not pretend to have my opinion as the only correct, so you can disagree with it. But if you are ready to view some thoughts on new development streams, keep reading.<br/><br/>
+
+<center><img class="shadow" src="../images/articles/evilapis/pr1.png" width=500px/></center> <br><br>
+				<strong>Instead of example</strong><br>
+				Imagine the situation: Peter is a newbie in the world of programming. He has just started learning Python, found out some basic concepts like conditions, loops or even differences between static and dynamic typization and wants to try out himself. He takes a small project – to test his knowledges and just for own interest. Let’s say it is a console weather forecast app. If he has watched some project-management videos, he creates a task list, like this one:
+
+				Input the city’s name
+				Search any weather forecast website with the key – city’s name
+				Scrape all the data
+				Output it into a console in a well-looking form
+
+				The first point seems very simple – input() function is one of the first to be taught in any Python course. Peter will write something like this:<br/><br/>
+
+				<pre><code class="language-python"> city = input('Write the name of your city: ')  </code></pre>
+
+				<br/><br/>But the next point looks not as simple as the previous one. There are no default functions like searchWebsite() or scrapeData() in Python. And Peter hasn’t learned requests yet.
+				And here he gets an idea. A really good idea, as he thinks. Why not to use some sort of APIs? A simple wrapper containing all needed functions to get needed functionality, all of the core code was written by other developers – what can be easier?
+
+				So, Peter install Weather API from pip, imports it… And that is it. The code now looks like this:
+ <br><br>
+
+				<pre><code class="language-python">from weather import Weather
+weather = Weather()
+city = input('Write the name of your city: ')
+location = weather.lookup_by_location(city)
+print(location.condition().text()) </code></pre>
+
+				<br/><br/>Here is the same version of the code, but with comments: <br><br>
+				<pre><code class="language-python">#import an API
+from weather import Weather
+
+#create an object for the API
+weather = Weather()
+
+#get the city's name
+city = input('Write the name of your city: ')
+
+#print the forecast
+location = weather.lookup_by_location(city)
+print(location.condition().text()) </code></pre>
+
+				<br/><br/>
+				Peter’s code has taken 5 lines. What has Peter learned creating this app?
+				Maybe, how to use pip – ‘PIP Installs Python’ or Python’s Package Control System to install his API. Obviously he has watched some documentation on how to use the API and even discovered for himself how this library works.
+<br/><br/>
+<b><i>But he hasn’t learned how to code creating this project.</i></b><br/><br/>
+All he was doing creating it was simply copypasting some pieces of code lots of developers have made before. Yes, they had a great well-looking wrapper, but how did it help Peter to learn more?
+
+<br>
+<br/><br/><strong>Instead of another example</strong> <br>
+But now imagine a perfect situation. Peter is ready does not want to use APIs, he wants to do everything on his own. So, he reads documentation, visits StackOverflow, goes to Wiki and asks more experienced developers when he gets stuck. And the code he gets looks like this:
+<pre><code class="language-python"># encoding: utf-8
+
+import sys
+from argparse import ArgumentParser
+from xml.dom import minidom
+
+try:
+  from urllib.request import urlopen
+  from urllib.parse import urlencode
+
+except ImportError:
+  from urllib import urlopen, urlencode
+
+API_URL = "http://www.google.com/ig/api?"
+
+
+def main():
+  arguments = ArgumentParser(prog="weather")
+  arguments.add_argument("--unit", choices="CF", dest="unit", default="C", help="Which unit to display the temperatures in")
+  arguments.add_argument("location", nargs="+")
+  args = arguments.parse_args(sys.argv[1:])
+
+
+  for location in args.location:
+    url = API_URL + urlencode({"weather": location})
+    xml = urlopen(url).read()
+    doc = minidom.parseString(xml)
+
+  forecast_information = doc.documentElement.getElementsByTagName("forecast_information")[0]
+  city = forecast_information.getElementsByTagName("city")[0].getAttribute("data")
+
+
+  current_conditions = doc.documentElement.getElementsByTagName("current_conditions")[0]
+  temp = current_conditions.getElementsByTagName("temp_f" if args.unit == "F" else "temp_c")[0].getAttribute("data")
+  condition = current_conditions.getElementsByTagName("condition")[0].getAttribute("data")
+  wind_condition = current_conditions.getElementsByTagName("wind_condition")[0].getAttribute("data")
+  humidity = current_conditions.getElementsByTagName("humidity")[0].getAttribute("data")
+
+  indent = " "
+  print("Weather for {0}:".format(city))
+  print(indent + "{0}°{1}".format(temp, args.unit))
+  print(indent + condition)
+  print(indent + wind_condition)
+  print(indent + humidity)
+
+if __name__ == "__main__":
+  main()</code></pre>
+
+<br><br>Yep, it is much bigger and maybe even scary. Obviously it has taken much more time for Peter to write it. But what has he learned during this process?
+Basics of DOMs, requests, webscraping, html/css wedocuments formatting, ErrorHandling, WebAPIs (do not confuse with Python libraries) and much more. Peter has found more experienced developers he can ask in case he gets problems with his code and, of course, he knows much more after creating this small project.
+<br>
+<br/><br/><strong>So, what is the conclusion?</strong> <br>
+
+APIs are perfect for jet development, or if the piece of code where you use them is not major for the project. But they are absolutely restricted for the newbies as the tool killing real developer in them. A possibility to skip hundreds of pages of programming theory seems pretty nice, but then it shows up in a big projects, lowering their quality to the floor. It is not enough to know how the syntax of language works. It is important to know what is inside.
+<br/><br/>
+<i>Special thanks to Jerome Leclanche for the second example, all the credits go to him.
+https://gist.github.com/jleclanche/2689784</i><br><br>
+
+That’s it!
+			<!--end of article.-->
+			</div>
+		</div>
+	</div>
+
+</body>
+
+<br><br>
+
+</html>
